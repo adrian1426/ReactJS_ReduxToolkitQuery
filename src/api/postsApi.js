@@ -8,8 +8,11 @@ export const postsApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => '/posts'
+    }),
+    getPostById: builder.query({
+      query: (postId) => `/posts/${postId}`
     })
   })
 });
 
-export const { useGetPostsQuery } = postsApi;
+export const { useGetPostsQuery, useGetPostByIdQuery } = postsApi;
