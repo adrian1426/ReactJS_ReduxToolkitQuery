@@ -5,9 +5,11 @@ const API = process.env.REACT_APP_API || "http://localhost:3005";
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: fetchBaseQuery({ baseUrl: API }),
+  tagTypes: ['Posts'],
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => '/posts'
+      query: () => '/posts',
+      providesTags: ['Posts']
     }),
     getPostById: builder.query({
       query: (postId) => `/posts/${postId}`
@@ -17,7 +19,8 @@ export const postsApi = createApi({
         url: '/posts',
         method: 'post',
         body: newPost
-      })
+      }),
+      invalidatesTags: ['Posts']
     })
   })
 });
