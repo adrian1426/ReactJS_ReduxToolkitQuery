@@ -1,27 +1,16 @@
 import React, { useState } from "react";
-import { createNewPost } from "../api/posts";
+import { useAddNewPostMutation } from "../api/postsApi";
 
 function NewPost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [createPost, { isLoading, error }] = useAddNewPostMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsLoading(true);
-    try {
-      await createNewPost({ title, body });
-
-      setTitle("");
-      setBody("");
-    } catch (error) {
-      setError(error);
-    }
-
-    setIsLoading(false);
+    createPost({ title, body });
   };
 
   return (
