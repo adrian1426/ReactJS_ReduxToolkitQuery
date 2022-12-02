@@ -10,7 +10,9 @@ function NewPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createPost({ title, body });
+    createPost({ title, body }).unwrap();
+    setTitle('');
+    setBody('');
   };
 
   return (
